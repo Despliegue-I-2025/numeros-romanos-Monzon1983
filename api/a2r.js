@@ -1,34 +1,24 @@
 export default function handler(req, res) {
   const { arabic } = req.query;
+
   if (!arabic || isNaN(arabic)) {
-    return res.status(400).json({ error: 'Parámetro "arabic" inválido' });
+    return res.status(400).json({ error: "Parámetro 'arabic' inválido" });
   }
 
-  const num = parseInt(arabic);
+  const num = parseInt(arabic, 10);
   const valores = [
-    { valor: 1000, simbolo: 'M' },
-    { valor: 900, simbolo: 'CM' },
-    { valor: 500, simbolo: 'D' },
-    { valor: 400, simbolo: 'CD' },
-    { valor: 100, simbolo: 'C' },
-    { valor: 90, simbolo: 'XC' },
-    { valor: 50, simbolo: 'L' },
-    { valor: 40, simbolo: 'XL' },
-    { valor: 10, simbolo: 'X' },
-    { valor: 9, simbolo: 'IX' },
-    { valor: 5, simbolo: 'V' },
-    { valor: 4, simbolo: 'IV' },
-    { valor: 1, simbolo: 'I' },
+    [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"],
+    [100, "C"], [90, "XC"], [50, "L"], [40, "XL"],
+    [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]
   ];
 
-  let resultado = '';
-  let n = num;
-  for (let i = 0; i < valores.length; i++) {
-    while (n >= valores[i].valor) {
-      resultado += valores[i].simbolo;
-      n -= valores[i].valor;
+  let romano = "";
+  for (const [valor, letra] of valores) {
+    while (num >= valor) {
+      romano += letra;
+      num -= valor;
     }
   }
 
-  res.status(200).json({ roman: resultado });
+  res.status(200).json({ romano });
 }
