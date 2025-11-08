@@ -1,51 +1,100 @@
-﻿// romanos.js
-export function arabicToRoman(num) {
-  const valores = [
-    { valor: 1000, simbolo: 'M' },
-    { valor: 900, simbolo: 'CM' },
-    { valor: 500, simbolo: 'D' },
-    { valor: 400, simbolo: 'CD' },
-    { valor: 100, simbolo: 'C' },
-    { valor: 90, simbolo: 'XC' },
-    { valor: 50, simbolo: 'L' },
-    { valor: 40, simbolo: 'XL' },
-    { valor: 10, simbolo: 'X' },
-    { valor: 9, simbolo: 'IX' },
-    { valor: 5, simbolo: 'V' },
-    { valor: 4, simbolo: 'IV' },
-    { valor: 1, simbolo: 'I' },
+﻿function arabicToRoman(num) {
+  if (typeof num !== "number" || isNaN(num)) {
+    throw new Error("Debe proporcionar un número válido");
+  }
+
+  if (num < 1 || num > 3999) {
+    throw new Error("El número debe estar entre 1 y 3999");
+  }
+
+  if (!Number.isInteger(num)) {
+    throw new Error("El número debe ser entero");
+  }
+
+  const conversions = [
+    { value: 1000, symbol: "M" },
+    { value: 900, symbol: "CM" },
+    { value: 500, symbol: "D" },
+    { value: 400, symbol: "CD" },
+    { value: 100, symbol: "C" },
+    { value: 90, symbol: "XC" },
+    { value: 50, symbol: "L" },
+    { value: 40, symbol: "XL" },
+    { value: 10, symbol: "X" },
+    { value: 9, symbol: "IX" },
+    { value: 5, symbol: "V" },
+    { value: 4, symbol: "IV" },
+    { value: 1, symbol: "I" }
   ];
 
-  let resultado = '';
-  let n = num;
-  for (let i = 0; i < valores.length; i++) {
-    while (n >= valores[i].valor) {
-      resultado += valores[i].simbolo;
-      n -= valores[i].valor;
+  let result = "";
+  let remaining = num;
+
+  for (const { value, symbol } of conversions) {
+    while (remaining >= value) {
+      result += symbol;
+      remaining -= value;
     }
   }
-  return resultado;
+
+  return result;
 }
 
-export function romanToArabic(roman) {
-  const valores = {
-    I: 1, V: 5, X: 10, L: 50,
-    C: 100, D: 500, M: 1000
-  };
-
-  const upper = roman.toUpperCase();
-  let total = 0;
-
-  for (let i = 0; i < upper.length; i++) {
-    const actual = valores[upper[i]];
-    const siguiente = valores[upper[i + 1]];
-    if (siguiente > actual) total -= actual;
-    else total += actual;
+function isValidRoman(roman) {
+  if (typeof roman !== "string" || roman.length === 0) {
+    return false;
   }
 
-  return total;
+  const pattern = /^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$/;
+  return pattern.test(roman);
 }
 
+function romanToArabic(roman) {
+  const input = roman.toUpperCase();
 
+  if (!isValidRoman(input)) {
+    throw new Error("Número romano inválido");
+  }
 
+  const map = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  };
 
+  let i = 0;
+  let result = 0;
+
+  while (i < input.length) {
+    const two = input.substring(i, i + 2);
+    const one = input.substring(i, i + 1);
+
+    if (map[two]) {
+      result += map[two];
+      i += 2;
+    } else if (map[one]) {
+      result += map[one];
+      i += 1;
+    } else {
+      throw new Error("Símbolo romano inválido");
+    }
+  }
+
+  return result;
+}
+
+module.exports = {
+  arabicToRoman,
+  romanToArabic,
+  isValidRoman
+};
