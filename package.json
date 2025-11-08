@@ -1,35 +1,5 @@
 {
-  "name": "romanos",
-  "version": "1.0.0",
-  "main": "romanos.js",
-  "scripts": {
-    "start": "romanos.js",
-    "test": "jest"
-  },
-  "dependencies": {
-    "express": "^4.21.2"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0"
-  },
-  "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/.vercel/"
-    ]
-  },
-  "description": "[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/gJA-GD-V)\r ﻿# Tateti Random",
-  "directories": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Despliegue-I-2025/numeros-romanos-Monzon1983.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Despliegue-I-2025/numeros-romanos-Monzon1983/issues"
-  },
-  "homepage": "https://github.com/Despliegue-I-2025/numeros-romanos-Monzon1983#readme"
+  "name": "numeros-romanos-monzon1983",
+  "version": "1.0.0"
 }
+
