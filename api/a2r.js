@@ -1,5 +1,10 @@
-﻿// romanos.js
-export function arabicToRoman(num) {
+export default function handler(req, res) {
+  const { arabic } = req.query;
+  if (!arabic || isNaN(arabic)) {
+    return res.status(400).json({ error: 'Parámetro "arabic" inválido' });
+  }
+
+  const num = parseInt(arabic);
   const valores = [
     { valor: 1000, simbolo: 'M' },
     { valor: 900, simbolo: 'CM' },
@@ -24,28 +29,6 @@ export function arabicToRoman(num) {
       n -= valores[i].valor;
     }
   }
-  return resultado;
+
+  res.status(200).json({ roman: resultado });
 }
-
-export function romanToArabic(roman) {
-  const valores = {
-    I: 1, V: 5, X: 10, L: 50,
-    C: 100, D: 500, M: 1000
-  };
-
-  const upper = roman.toUpperCase();
-  let total = 0;
-
-  for (let i = 0; i < upper.length; i++) {
-    const actual = valores[upper[i]];
-    const siguiente = valores[upper[i + 1]];
-    if (siguiente > actual) total -= actual;
-    else total += actual;
-  }
-
-  return total;
-}
-
-
-
-
