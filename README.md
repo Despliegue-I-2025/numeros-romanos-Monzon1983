@@ -1,42 +1,37 @@
-# Conversor de Números Romanos
+Conversor de Números Romanos
 
-Este proyecto permite convertir números romanos a números arábigos y viceversa. Incluye validación de entradas, pruebas unitarias y una interfaz web para realizar pruebas visuales. Desarrollado en TypeScript.
+Este proyecto convierte números romanos a árabes y al revés. También valida si un número romano es válido. Tiene una interfaz web para probarlo y pruebas automáticas. Está hecho en TypeScript.
 
 Funciones:
 
-- Conversión de números romanos a arábigos (ej. XIV= 14)
-- Conversión de números arábigos a romanos (ej. 14 = XIV)
-- Validación de números romanos
-- Interfaz web para pruebas interactivas
-- Pruebas unitarias con casos representativos
+- Convierte números romanos a árabes (por ejemplo: XIV = 14)
+- Convierte números árabes a romanos (por ejemplo: 14 = XIV)
+- Valida si un número romano es correcto
+- Tiene una página web para probarlo
+- Tiene pruebas automáticas con casos comunes
 
 Ejemplos:
 
+convertirRomano("XIV") // 14  
+convertirArabigo(14) // "XIV"  
+esRomanoValido("IC") // false
 
-convertirRomano("XIV");     // 14  
-convertirArabigo(14);       // "XIV"
-esRomanoValido("IC");       // false
+Estructura del proyecto:
 
-Estructura del proyecto
+- romano.ts : funciones principales  
+- romano.test.ts : pruebas automáticas  
+- index.html : página web para probar  
+- README.md : este archivo
 
-romano.ts: funciones principales de conversión y validación  
-romano.test.ts: pruebas unitarias con distintos casos  
-index.html: interfaz web para probar el conversor  
-README.md: documentación del proyecto
+Cómo probarlo:
 
-Como probarlo:
-
-El proyecto está desplegado en Vercel y puede probarse directamente desde el siguiente enlace:
+Está subido en Vercel =>
 
 https://numeros-romanos-monzon1983.vercel.app
 
-Ejecución local y tests
-
-Para ejecutar el proyecto localmente y correr los tests:
-
+Para probarlo en el visual :
 
 npm install  
 npm test
 
-
-Las pruebas están escritas con Jest y cubren casos válidos, inválidos y límites.
+Las pruebas están hechas con Jest y cubren casos válidos, inválidos y límites.
