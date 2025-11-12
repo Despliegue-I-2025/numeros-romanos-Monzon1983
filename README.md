@@ -4,8 +4,8 @@ Este proyecto permite convertir números romanos a números arábigos y vicevers
 
 Funciones:
 
-- Conversión de números romanos a arábigos (ej. `"XIV"` → `14`)
-- Conversión de números arábigos a romanos (ej. `14` → `"XIV"`)
+- Conversión de números romanos a arábigos (ej. XIV= 14)
+- Conversión de números arábigos a romanos (ej. 14 = XIV)
 - Validación de números romanos
 - Interfaz web para pruebas interactivas
 - Pruebas unitarias con casos representativos
