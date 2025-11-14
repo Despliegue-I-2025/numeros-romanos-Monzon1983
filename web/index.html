@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Conversor de Números Romanos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+      white-space: pre-wrap;
+    }
+    .success {
+      background-color: #e6ffe6;
+      color: #006600;
+      border: 1px solid #00cc00;
+    }
+    .error {
+      background-color: #ffe6e6;
+      color: #990000;
+      border: 1px solid #ff3333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Conversor de Números Romanos</h1>
+
+  <label for="arabic">Número arábico:</label>
+  <input type="number" id="arabic" placeholder="Ej: 1983">
+
+  <label for="roman">Número romano:</label>
+  <input type="text" id="roman" placeholder="Ej: MCMLXXXIII">
+
+  <button onclick="convertArabic()">Convertir a romano</button>
+  <button onclick="convertRoman()">Convertir a arábico</button>
+
+  <h2>Resultado:</h2>
+  <pre id="result">Esperando conversión...</pre>
+
+  <script>
+    const baseUrl = "https://numeros-romanos-monzon1983.vercel.app/api";
+
+    async function convertArabic() {
+      const number = document.getElementById("arabic").value;
+      const resultBox = document.getElementById("result");
+      resultBox.textContent = "Procesando...";
+      resultBox.className = "";
+
+      try {
+        const res = await fetch(`${baseUrl}?number=${number}`);
+        const data = await res.json();
+
+        if (data.success) {
+          resultBox.textContent = JSON.stringify(data, null, 2);
+          resultBox.className = "success";
+        } else {
+          resultBox.textContent = `Error: ${data.error}`;
+          resultBox.className = "error";
+        }
+      } catch (err) {
+        resultBox.textContent = "Error de conexión con la API.";
+        resultBox.className = "error";
+      }
+    }
+
+    async function convertRoman() {
+      const roman = document.getElementById("roman").value.toUpperCase();
+      const resultBox = document.getElementById("result");
+      resultBox.textContent = "Procesando...";
+      resultBox.className = "";
+
+      try {
+        const res = await fetch(`${baseUrl}?roman=${roman}`);
+        const data = await res.json();
+
+        if (data.success) {
+          resultBox.textContent = JSON.stringify(data, null, 2);
+          resultBox.className = "success";
+        } else {
+          resultBox.textContent = `Error: ${data.error}`;
+          resultBox.className = "error";
+        }
+      } catch (err) {
+        resultBox.textContent = "Error de conexión con la API.";
+        resultBox.className = "error";
+      }
+    }
+  </script>
+</body>
+</html>
