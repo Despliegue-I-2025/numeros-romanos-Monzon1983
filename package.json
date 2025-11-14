@@ -1,13 +1,4 @@
 {
-<<<<<<< HEAD
-  "scripts": {
-    "test": "jest"
-  },
-  "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "jest": "^30.2.0",
-    "ts-jest": "^29.4.5"
-=======
   "name": "numeros-romanos-monzon1983",
   "version": "1.0.0",
   "description": "API para convertir números arábigos a romanos",
@@ -18,13 +9,22 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "keywords": ["romanos", "numeros", "api", "vercel"],
+  "keywords": [
+    "romanos",
+    "numeros",
+    "api",
+    "vercel"
+  ],
   "author": "Mauro Monzon",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "cors": "^2.8.5"
+  },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@vercel/node": "^3.0.0",
-    "jest": "^29.7.0",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
     "vercel": "^33.0.0"
   },
   "jest": {
@@ -37,6 +37,5 @@
       "/node_modules/",
       "/coverage/"
     ]
->>>>>>> af320ec7b2b4e059e67c57ea9ac27dab809096e3
   }
 }

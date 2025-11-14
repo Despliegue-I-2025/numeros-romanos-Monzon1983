@@ -1,4 +1,5 @@
-﻿function arabicToRoman(num) {
+﻿// 20251113 - Forzar actualización de Vercel
+function arabicToRoman(num) {
   if (typeof num !== "number" || isNaN(num)) {
     throw new Error("Debe proporcionar un número válido");
   }
@@ -53,7 +54,7 @@ function romanToArabic(roman) {
   const input = roman.toUpperCase();
 
   if (!isValidRoman(input)) {
-    throw new Error("Número romano inválido");
+    throw new Error(`Número romano inválido: ${input}`);
   }
 
   const map = {
@@ -86,7 +87,9 @@ function romanToArabic(roman) {
       result += map[one];
       i += 1;
     } else {
-      throw new Error("Símbolo romano inválido");
+      // Esta línea teóricamente no se debería alcanzar si isValidRoman funciona bien,
+      // pero se mantiene como una barrera de seguridad.
+      throw new Error("Símbolo romano inválido"); 
     }
   }
 

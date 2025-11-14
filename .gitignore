@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 .vercel
-=======
 node_modules/
 dist/
 .env
@@ -8,4 +6,3 @@ npm-debug.log
 *.log
 .vercel
 .private
->>>>>>> af320ec7b2b4e059e67c57ea9ac27dab809096e3
