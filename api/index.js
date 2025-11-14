@@ -36,29 +36,48 @@ module.exports = async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const { arabic, roman } = parsedUrl.query;
 
-  // --- ARÁBIGO A ROMANO (Se activa si el parámetro 'arabic' existe) ---
-  if (arabic) {
-    const num = parseInt(arabic, 10);
-
-    try {
-      // arabicToRoman contiene validaciones para NaN, entero y rango 1-3999
-      const romanResult = arabicToRoman(num);
-      res.writeHead(200, { "Content-Type": "application/json" });
-      return res.end(JSON.stringify({ 
-        roman: romanResult 
-      }));
-    } catch (error) {
-      // Captura el error lanzado por la función (ej: número fuera de rango)
-      res.writeHead(400, { "Content-Type": "application/json" });
-      return res.end(
-        JSON.stringify({
-          error: error.message,
-          received: arabic,
-          success: false,
-        })
-      );
+// --- ARÁBIGO A ROMANO (Se activa si el parámetro 'arabic' existe) ---
+if (arabic) {
+    
+    // 1. VALIDACIÓN ESTRICTA: Rechaza entradas mixtas (ej: "12abc")
+    // Verifica que la cadena SÓLO contenga dígitos (0-9).
+    if (!/^\d+$/.test(arabic)) {
+        return res.status(400).json({ 
+            error: "El valor arábigo solo debe contener dígitos (0-9).",
+            received: arabic,
+            success: false
+        });
     }
-  }
+
+    // 2. CONVERSIÓN SEGURA a número (Una vez que la cadena es validada)
+    const num = parseInt(arabic, 10); 
+
+    // Manejo de Error 400: Número fuera de rango o lógico (como ya lo tienes)
+    if (num < 1 || num > 3999) { 
+        return res.status(400).json({ 
+            error: "El número debe estar entre 1 y 3999.",
+            received: num,
+            success: false
+        });
+    }
+    
+    // 3. Ejecutar la lógica de conversión dentro de try-catch
+    try {
+      const romanResult = arabicToRoman(num);
+      return res.status(200).json({
+        arabic: num,
+        roman: romanResult,
+        success: true
+      });
+    } catch (error) {
+      // Captura cualquier error de la lógica de conversión
+      return res.status(400).json({
+        error: error.message, 
+        received: num,
+        success: false
+      });
+    }
+}
 
   // --- ROMANO A ARÁBIGO (Se activa si el parámetro 'roman' existe) ---
   if (roman) {
