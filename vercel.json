@@ -7,17 +7,16 @@
     }
   ],
   "routes": [
-    
+ 
     { 
       "src": "/a2r", 
       "dest": "/api/index.js" 
     },
-    
     { 
       "src": "/r2a", 
       "dest": "/api/index.js" 
     },
-    
+
     { 
       "src": "/(.*)", 
       "dest": "/api/index.js" 
