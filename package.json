@@ -1,41 +1,13 @@
 {
-  "name": "numeros-romanos-monzon1983",
+  "name": "conversor-romanos-api",
   "version": "1.0.0",
-  "description": "API para convertir números arábigos a romanos",
+  "description": "API para convertir números arábigos a romanos y viceversa.",
   "main": "api/index.js",
   "scripts": {
-    "start": "vercel dev",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "start": "node api/index.js"
   },
-  "keywords": [
-    "romanos",
-    "numeros",
-    "api",
-    "vercel"
-  ],
-  "author": "Mauro Monzon",
-  "license": "MIT",
   "dependencies": {
-    "cors": "^2.8.5"
-  },
-  "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "@vercel/node": "^3.0.0",
-    "jest": "^30.2.0",
-    "ts-jest": "^29.4.5",
-    "vercel": "^33.0.0"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "romanos.js",
-      "api/**/*.js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/coverage/"
-    ]
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }
