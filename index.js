@@ -84,6 +84,14 @@ app.get('/a2r', (req, res) => {
             error: "Falta el parámetro 'arabic' (número) requerido." 
         });
     }
+    
+    // ** CORRECCIÓN: Validar que la cadena SÓLO contenga dígitos **
+    if (!/^\d+$/.test(arabic)) {
+        return res.status(400).json({ 
+            error: 'Parámetro inválido', 
+            message: 'El valor de "arabic" debe contener solo dígitos numéricos.' 
+        });
+    }
 
     const num = parseInt(arabic);
 
